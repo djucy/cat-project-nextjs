@@ -3,25 +3,70 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+--primary-text-color:#1D1D1D;
+--secondary-text-color:#8C8C8C;
+--primary-bg-color:#F8F8F7;
+--secondary-bg-color:#FFF;
+--hover-color:#FBE0DC;
+--active-color:#FF868E;
+--violet-color:#B4B7FF;
+--orange-color:#FFD280;
+--green-color:#97EAB9;
+--border-color:rgba(255, 255, 255, 0.60);
+
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
     --background-start-rgb: 0, 0, 0;
     --background-end-rgb: 0, 0, 0;
   }
+} */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+html{
+  background-color:#1D1D1D
 }
+body{
+  background-color: var(--primary-bg-color);
+  min-height: 100vh;
+  min-width: 100vw;
+  margin:0 auto;
+}
+/* Start: General styles */
+.text-xl-normal{
+  @apply text-xl/normal font-normal
+}
+.text-xl-medium{
+  @apply text-xl/normal font-medium
+}
+.text-base-normal{
+  @apply text-base/normal font-normal
+}
+.text-base-medium{
+  @apply text-base/normal font-medium
+}
+
+.items-centering{
+  @apply flex justify-center items-center
+}
+
+
+/* End: General styles */
+
+/* Start: Container styles */
+.body__container{
+  @apply relative ml-auto mr-auto py-3 pr-3 pl-[147px] flex justify-between max-w-[1440px] 
+}
+.main__container{
+  @apply w-[680px] bg-white mt-1 p-2 rounded-[20px]
+}
+/* End: Container styles */
+
+

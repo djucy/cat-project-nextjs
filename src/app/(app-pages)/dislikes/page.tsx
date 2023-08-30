@@ -1,12 +1,18 @@
-import React from 'react'
+'use client'
 
-function Dislikes
-() {
+import { useEffect } from 'react'
+import { getImagesBySubid } from '@/utils'
+
+function Dislikes() {
+  useEffect(() => {
+    getImagesBySubid();
+  },[])
+
+
   return (
-    <div>Dislikes
-      
-    </div>
-  )
+  <div>Dislike</div>
+)
+
 }
 
 export default Dislikes

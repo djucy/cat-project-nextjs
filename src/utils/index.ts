@@ -9,6 +9,13 @@ export async function getVoting() {
   return data
 }
 
+export async function getGalleryImages(){
+  const { data } = await axios.get('images/search?limit=10', { headers: { 'x-api-key': API_KEY } });
+  console.log(data)
+  return data
+}
+// https://api.thecatapi.com/v1/images/search?limit=10
+
 export async function postFavouriteImage(id:string) {
   const {data }=await axios.post('favourites', { image_id: id, sub_id: USER_ID }, { headers: { 'x-api-key': API_KEY } });
   
@@ -23,25 +30,29 @@ export async function getFavouriteById(image_id: string) {
 }
 
 export async function getFavourites() {
-  const { data } = await axios.get('favourites', { headers: { 'x-api-key': API_KEY } });
-  console.log(data)
+  const { data } = await axios.get(`favourites?sub_id=${USER_ID}`, { headers: { 'x-api-key': API_KEY } });
   
+  const dataList = data.map(({ image }: { image: { url: string, id: string } }) => {
+    const { url, id } = image;
+    return {url,id}
+  } 
+  )
+  console.log(dataList)
+  return dataList
+}
+
+export async function getBreeds() {
+  const { data } = await axios.get('breeds', { headers: { 'x-api-key': API_KEY } });
+  console.log(data)
+  return data;
+}
+
+export async function getImagesBySubid() {
+  const { data } = await axios.get(`images/search?sub_id=${USER_ID}`, { headers: { 'x-api-key': API_KEY } });
+  console.log(data)
   return data
 }
-// function showImageToVoteOn()
-// {
+
+export async function getImagesByBreed() {
   
-//   const url = `${API_URL}images/search`;
-
-//   fetch(url,{headers: {
-//     'x-api-key': API_KEY
-//   }})
-//   .then((response) => {
-//     return response.json();
-//   })
-//   .then((data) => {
-//     currentImageToVoteOn = data[0];
-//     document.getElementById("image-to-vote-on").src= currentImageToVoteOn.url;
-//   });
-
-// }
+}

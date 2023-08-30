@@ -5,6 +5,8 @@ import SearchBar from "./SearchBar";
 import BackButtonWithTitle from "./BackButtonWithTitle";
 import ImageList from "./ImageList";
 import ImageItem from "./ImageItem";
+import SelectBreedsBox from "./SelectBreedsBox";
+import NumberItemsBreedBox from "./NumberItemsBreedBox";
 
 
 export {
@@ -15,4 +17,6 @@ export {
   BackButtonWithTitle,
   ImageList,
   ImageItem,
+  SelectBreedsBox,
+  NumberItemsBreedBox
 }

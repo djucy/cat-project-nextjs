@@ -8,6 +8,10 @@ const nextConfig = {
         port: '',
         // pathname: '/account123/**',
       },
+      {
+        protocol: 'https',
+        hostname: '28.media.tumblr.com',
+      },
     ],
   },
   webpack(config) {

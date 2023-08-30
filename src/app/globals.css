@@ -57,6 +57,13 @@ body{
   @apply flex justify-center items-center
 }
 
+.options__list{
+  @apply absolute w-[300px] mt-1 rounded-[30px] p-2 overflow-auto bg-white
+}
+
+.button__arrow{
+  @apply absolute top-[14px] right-[10px]
+}
 
 /* End: General styles */
 

@@ -10,7 +10,7 @@ function BackButtonWithTitle({children}:{children?:React.ReactNode}) {
   
 
   return (
-    <div className='flex items-center space-x-1'>
+    <div className='flex items-center space-x-1 h-4'>
       <button type='button' onClick={() => router.back()} className='flex justify-center items-center h-4 w-4 bg-[var(--hover-color)] rounded-[10px]'>
         <Image src='/arrow-left.svg' alt='Arrow is pointing at the left' width={20} height={20}/>
       </button>

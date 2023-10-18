@@ -6,8 +6,8 @@ import { Listbox } from '@headlessui/react'
 import DropdownArrow from '../../public/dropdown-arrow.svg'
 import { limitList } from '@/constants'
 
-function NumberItemsBreedBox() {
-  const [selected, setSelected] = useState(limitList[1]);
+function NumberItemsBreedBox({selected,setSelected}:{selected:number,setSelected:(selected:number)=>void}) {
+  // const [selected, setSelected] = useState(limitList[1]);
 
   return (
     
@@ -21,7 +21,7 @@ function NumberItemsBreedBox() {
               </span>
           </Listbox.Button>
           </div>
-        <Listbox.Options className='options__list'>
+        <Listbox.Options className='options__list z-20'>
           {limitList.map((limit, index) => (
             <Listbox.Option key={index}
             value={limit}>

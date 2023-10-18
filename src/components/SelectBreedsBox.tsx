@@ -31,7 +31,7 @@ function SelectBreedsBox({ data, inputStyle, selectedOption, setSelectedOption }
         </Combobox.Button>
         </div>
      
-      <Combobox.Options className={`options-list  h-[300px]`}>
+      <Combobox.Options className={`options-list  h-[300px] z-30 absolute`}>
         {filteredOption.map((option) => (
           /* Use the `active` state to conditionally style the active option. */
           /* Use the `selected` state to conditionally style the selected option. */

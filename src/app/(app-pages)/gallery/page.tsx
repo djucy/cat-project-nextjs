@@ -15,7 +15,7 @@ const [images, setImages] = useState([])
   return (
     <>
       <BackButtonWithTitle/>
-      <ImageList data={images} />
+      <ImageList data={images} imagesAmount={10}/>
     </>
   )
 }

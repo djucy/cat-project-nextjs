@@ -11,7 +11,8 @@ import WhiteHeart from '../../../../public/white-heart.svg'
 
 
 function Voting() {
-const [cat, setCat] = useState({})
+  const [cat, setCat] = useState<{id?:string,url?:string}> ({})
+  console.log(cat)
   
   useEffect(() => {
     getVoting()
@@ -22,8 +23,16 @@ const [cat, setCat] = useState({})
 
   const voteFauvorite = (e:React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
-    postFavouriteImage(cat.id)
-      .then(data => console.log(data))
+    const { id } = cat
+    if (!id) {
+      return
+    } else {
+       postFavouriteImage(id)
+         .then(data => console.log(data))
+      getVoting()
+    .then(data=>setCat(data[0]))
+    }
+   
     
     
 }

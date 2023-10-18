@@ -13,7 +13,7 @@ function Favourites() {
     .then(data=>setFavourites(data))
   },[])
   return (
-    <ImageList data={favourites } />
+    <ImageList data={favourites } imagesAmount={10} />
   )
 }
 

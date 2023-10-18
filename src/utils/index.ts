@@ -41,10 +41,13 @@ export async function getFavourites() {
   return dataList
 }
 
-export async function getBreeds() {
-  const { data } = await axios.get('breeds', { headers: { 'x-api-key': API_KEY } });
-  console.log(data)
-  return data;
+export async function getBreeds(number:number) {
+  const { data } = await axios.get(`breeds?limit=${number}`, { headers: { 'x-api-key': API_KEY } });
+  const dataList:{id: string, name: string, image: { url: string, id: string }}[]=data.map(({ id, name, image }: { id: string, name: string, image: { url: string, id: string } }) => (
+  
+          {id,name,image}))
+  console.log(dataList)
+  return dataList
 }
 
 export async function getImagesBySubid() {

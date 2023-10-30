@@ -41,13 +41,24 @@ export async function getFavourites() {
   return dataList
 }
 
-export async function getBreeds(number:number) {
-  const { data } = await axios.get(`breeds?limit=${number}`, { headers: { 'x-api-key': API_KEY } });
+export async function getBreeds() {
+  const { data } = await axios.get(`breeds`, { headers: { 'x-api-key': API_KEY } });
   const dataList:{id: string, name: string, image: { url: string, id: string }}[]=data.map(({ id, name, image }: { id: string, name: string, image: { url: string, id: string } }) => (
   
           {id,name,image}))
   console.log(dataList)
   return dataList
+}
+
+export async function getSelectBreeds() {
+  const { data } = await axios.get('breeds', { headers: { 'x-api-key': API_KEY } });
+  const selectName:{name:string,id:string}[]= data.map(({ name,id }:{name:string,id:string}) => ({ name ,id}));
+    return selectName
+}
+
+export async function getImagesByBreed(breed_ids:string) {
+  const { data } = await axios.get(`breeds/${breed_ids}`, { headers: { 'x-api-key': API_KEY } });
+  return data
 }
 
 export async function getImagesBySubid() {
@@ -56,6 +67,4 @@ export async function getImagesBySubid() {
   return data
 }
 
-export async function getImagesByBreed() {
-  
-}
+

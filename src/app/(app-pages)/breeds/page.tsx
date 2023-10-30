@@ -1,9 +1,9 @@
 "use client"
 
 import { useState, useEffect } from "react"
-
+import usePagination from "@/hooks/usePagination"
 import { BackButtonWithTitle, SelectBreedsBox,NumberItemsBreedBox,ImageList } from "@/components"
-import { getBreeds } from "@/utils"
+import { getBreeds,getSelectBreeds,getImagesByBreed } from "@/utils"
 import { limitList } from '@/constants'
 
 
@@ -11,30 +11,48 @@ import { limitList } from '@/constants'
 
 
 function Breeds() {
-  const [breeds, setBreeds] = useState <{name:string,id:string}[]>([{ name: 'All breeds', id: 'null' }]);
+  const [breeds, setBreeds] = useState<{ name: string, id: string }[]>([{ name: 'All breeds', id: 'null' }]);
+  const [numberBreeds,setNumberBreeds]=useState([])
   const [breed, setBreed] = useState(breeds[0])
   const [image, setImage] = useState<{
-    id: string,
-    url: string,
-}[]>([])
+    id?: string,
+    name?: string,
+    image: {
+      id: string,
+      url: string
+    }
+  }[]>([])
    const [selected, setSelected] = useState(limitList[1]);
   console.log(breeds)
   console.log(breed)
   console.log(image)
-
+  const {
+    firstContentIndex,
+    lastContentIndex,
+    nextPage,
+    prevPage,
+    page,
+   
+    setPage,
+    totalPages,
+  } = usePagination({
+    contentPerPage: selected,
+    count: image.length,
+  });
+const images=image.slice(firstContentIndex,lastContentIndex)
   useEffect(() => {
     const getDataList = () => {
-    getBreeds(selected)
+    getBreeds()
       .then(data => {
-        const imageList = data.filter(({ image }: { image: { id: string, url: string } }) => {
-          return image
-        }).map(({ image }: { image: { id: string, url: string } }) => {
-           const { id, url } = image
-          return{id,url} 
+        const imageList = data.filter(({id,name, image }: {id:string, name:string, image: { id: string, url: string } }) => {
+          return {id,name,image}
+        }).map(({id,name, image }: {id:string,name:string, image: { id: string, url: string } }) => {
+          
+          return{id,name,image} 
 
         })
         console.log(imageList)
-        setBreeds((prev: {name:string,id:string}[]) => [...prev, ...data]);
+        // setBreeds((prev: {name:string,id:string}[]) => [...prev, ...data]);
         setImage(imageList);
       })
   .catch(error=>console.log(error))
@@ -42,11 +60,23 @@ function Breeds() {
     getDataList()
           
     
-  },[selected])
-
-
-
+  },[])
   
+  useEffect(() => {
+    getSelectBreeds()
+      .then(data => {
+        setBreeds((prev: { name: string, id: string }[]) => [...prev, ...data]);
+        
+    })
+},[])
+
+  useEffect(() => {
+    const{id,name}=breed
+    getImagesByBreed(id)
+    .then(data=>console.log(data))
+  },[breed])
+
+  console.log(lastContentIndex)
 
   return (
     <>
@@ -57,7 +87,11 @@ function Breeds() {
       </BackButtonWithTitle>
   
     </div>
-      <ImageList data={image} imagesAmount={selected}></ImageList>
+      <ImageList data={images} imagesAmount={selected} />
+      <div>
+        {page!==1&&<button onClick={prevPage}>Previous</button>}
+        {page!==totalPages&&<button onClick={nextPage}>Next</button>}
+      </div>
       </>
   )
 }

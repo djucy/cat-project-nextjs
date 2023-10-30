@@ -1,11 +1,12 @@
 'use client'
 
 import { useEffect } from 'react'
-import { getImagesBySubid } from '@/utils'
+import { getImagesByBreed, getImagesBySubid } from '@/utils'
 
 function Dislikes() {
   useEffect(() => {
-    getImagesBySubid();
+    getImagesByBreed()
+    .then(data=>console.log(data))
   },[])
 
 
